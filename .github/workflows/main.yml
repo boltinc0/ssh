@@ -8,8 +8,7 @@ on:
 
 jobs:
   setup-ssh:
-    runs-on: blacksmith-2vcpu-ubuntu-2204
-    timeout-minutes: 360  # Max runtime of 6 hours
+    runs-on: blacksmith-4vcpu-ubuntu-2204
 
     steps:
       - name: Check out the repository
