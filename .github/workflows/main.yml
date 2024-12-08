@@ -8,9 +8,10 @@ on:
 
 jobs:
   setup-ssh:
-    runs-on: blacksmith-2vcpu-ubuntu-2204 # Change to your custom runner label
+    runs-on: buildjet-8vcpu-ubuntu-2204 # Change to your custom runner label
     timeout-minutes: 360  # Max runtime of 6 hours
     steps:
     - uses: actions/checkout@v4
+    - uses: buildjet/cache@v3
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
