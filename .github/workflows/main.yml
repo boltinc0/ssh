@@ -8,7 +8,7 @@ on:
 
 jobs:
   setup-ssh:
-    runs-on: fasterci-2xlarge # Change to your custom runner label
+    runs-on: fasterci-medium # Change to your custom runner label
     timeout-minutes: 360  # Max runtime of 6 hours
     steps:
     - uses: actions/checkout@v4
