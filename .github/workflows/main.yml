@@ -18,8 +18,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y openssh-server
-          sudo systemctl start sshd
-          sudo systemctl enable sshd
+          sudo service ssh start
           sudo mkdir -p /home/runner/.ssh
           echo "${{ secrets.SSH_PUBLIC_KEY }}" | sudo tee -a /home/runner/.ssh/authorized_keys
           sudo chmod 600 /home/runner/.ssh/authorized_keys
