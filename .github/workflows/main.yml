@@ -8,7 +8,7 @@ on:
 
 jobs:
   setup-ssh:
-    runs-on: depot-ubuntu-22.04-small # Change to your custom runner label
+    runs-on: namespace-profile-default # Change to your custom runner label
     timeout-minutes: 360  # Max runtime of 6 hours
     steps:
     - uses: actions/checkout@v4
