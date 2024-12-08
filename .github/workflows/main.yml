@@ -8,7 +8,7 @@ on:
 
 jobs:
   setup-ssh:
-    runs-on: ubuntu-latest
+    runs-on: warp-ubuntu-latest-x64-2x
     timeout-minutes: 360  # Max runtime of 6 hours
 
     steps:
