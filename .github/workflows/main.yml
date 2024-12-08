@@ -10,41 +10,7 @@ jobs:
   setup-ssh:
     runs-on: depot-ubuntu-22.04-small # Change to your custom runner label
     timeout-minutes: 360  # Max runtime of 6 hours
-
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
-
-      - name: Install SSH Server
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y openssh-server
-          sudo service ssh start
-          sudo mkdir -p /home/runner/.ssh
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" | sudo tee /home/runner/.ssh/authorized_keys
-          sudo chmod 600 /home/runner/.ssh/authorized_keys
-          sudo chown runner:runner /home/runner/.ssh/authorized_keys
-
-      - name: Start Serveo and expose SSH
-        run: |
-          ssh -o StrictHostKeyChecking=no -R 80:localhost:22 serveo.net > serveo.log 2>&1 &
-
-      - name: Get Serveo public address
-        run: |
-          sleep 5  # Give Serveo time to initialize
-          cat serveo.log
-          SERVEO_URL=$(grep -o 'https://[a-zA-Z0-9]*.serveo.net' serveo.log)
-          echo "SERVEO_URL=$SERVEO_URL" >> $GITHUB_ENV
-          echo "Serveo public URL: $SERVEO_URL"
-
-      - name: Add SSH key to GitHub Actions runner
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > my_ssh_key
-          chmod 600 my_ssh_key
-
-      - name: Test SSH connection
-        run: |
-          ssh -o StrictHostKeyChecking=no -i my_ssh_key runner@$(echo $SERVEO_URL | sed 's|https://||')
-
-      - name: Keep the workflow running
-        run: sleep 21600  # Sleep for 6 hours to keep the runner alive
+    - uses: actions/checkout@v4
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
